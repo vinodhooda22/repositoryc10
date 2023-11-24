@@ -1,5 +1,6 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
+var bodyParser = require('body-parser');
 
 const newPostController = require('./controllers/newPost')
 const homeController = require('./controllers/home')
@@ -24,6 +25,9 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(fileUpload())
 // app.use(customMiddleware)   // to call our middleware each time any page is opened.
 app.use('/posts/new',customMiddleware)   // to call our middleware only when newpost page is opened
